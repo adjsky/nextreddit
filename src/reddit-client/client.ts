@@ -1,5 +1,6 @@
 import "server-only"
 import { env } from "../env/server.mjs"
+import packageJson from "../../package.json"
 import type { AccessTokenData } from "./types.js"
 
 class RedditClient {
@@ -32,7 +33,6 @@ class RedditClient {
     options?: RequestInit,
     reinvokeToken?: boolean
   ): Promise<T> {
-    console.log(uri, reinvokeToken)
     if (reinvokeToken || this.oauthToken == "") {
       await this.accessToken()
     }
@@ -41,7 +41,8 @@ class RedditClient {
     const response = await fetch(url, {
       ...options,
       headers: {
-        Authorization: `Bearer ${this.oauthToken}`
+        Authorization: `Bearer ${this.oauthToken}`,
+        "User-Agent": `web:next:${packageJson.version} (by /u/adjsky)`
       }
     })
 
@@ -57,6 +58,14 @@ class RedditClient {
   }
 }
 
-const redditClient = new RedditClient()
+const globalForRedditClient = globalThis as unknown as {
+  redditClient: RedditClient
+}
+
+const redditClient = globalForRedditClient.redditClient || new RedditClient()
+
+if (env.NODE_ENV != "production") {
+  globalForRedditClient.redditClient = redditClient
+}
 
 export default redditClient

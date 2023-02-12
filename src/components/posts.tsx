@@ -7,7 +7,7 @@ type PostsProps = {
 
 const AsyncPosts = async ({ source }: PostsProps) => {
   const posts: any = await redditClient.request(`/${source}`, {
-    next: { revalidate: 5 }
+    next: { revalidate: 30 }
   })
 
   return <span>{posts.data.children[0].data.title}</span>
