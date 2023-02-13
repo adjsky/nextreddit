@@ -25,7 +25,7 @@ const RootLayout: React.FC<React.PropsWithChildren> = ({ children }) => {
       <head />
       <body className="bg-black-900 text-white">
         <Header />
-        <div className="px-3">{children}</div>
+        {children}
       </body>
     </html>
   )

@@ -3,9 +3,11 @@ import CommunityNavigation from "@/components/community-navigation"
 
 const CommunityLayout: React.FC<React.PropsWithChildren> = ({ children }) => {
   return (
-    <main className="mx-auto my-5 flex w-full max-w-[750px] flex-col items-start gap-5">
-      <CommunityNavigation />
-      {children}
+    <main className="py-5 px-3">
+      <div className="mx-auto flex w-full max-w-[750px] flex-col items-start gap-5">
+        <CommunityNavigation />
+        {children}
+      </div>
     </main>
   )
 }
