@@ -16,26 +16,24 @@ const CommunityNavigation: React.FC = () => {
   const pathname = usePathname()
 
   return (
-    <div className="w-full overflow-x-auto rounded-md">
-      <nav>
-        <ul className="flex">
-          {navigation.map((item, index) => (
-            <li key={index}>
-              <Link
-                href={item.href}
-                className={clsx(
-                  "flex py-2 px-5",
-                  item.href == pathname && "bg-aqua text-gray-600",
-                  item.href != pathname && "bg-gray-600"
-                )}
-              >
-                {item.title}
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </nav>
-    </div>
+    <nav className="flex max-w-full overflow-x-auto rounded-md">
+      <ul className="flex">
+        {navigation.map((item, index) => (
+          <li key={index}>
+            <Link
+              href={item.href}
+              className={clsx(
+                "flex py-2 px-5",
+                item.href == pathname && "bg-aqua text-gray-600",
+                item.href != pathname && "bg-gray-600"
+              )}
+            >
+              {item.title}
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </nav>
   )
 }
 
