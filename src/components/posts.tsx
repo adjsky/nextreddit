@@ -16,7 +16,6 @@ const getPosts = async (source: Community, after?: string, before?: string) => {
   const response = await redditClient.request<{
     data: { children: { data: PostData }[] }
   }>(`/${source}`, {
-    next: { revalidate: after || before ? false : 30 },
     query: {
       after,
       before,
