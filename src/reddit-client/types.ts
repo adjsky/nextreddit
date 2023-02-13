@@ -34,6 +34,7 @@ export type PostData = {
   created: number
   id: string
   author: string
+  name: string
   num_comments: string
   link_flair_richtext: LinkFlairRichText[]
   link_flair_text_color: string

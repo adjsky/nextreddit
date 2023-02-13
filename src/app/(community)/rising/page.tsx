@@ -1,12 +1,12 @@
-import React from "react"
-import Posts from "@/components/posts"
+import CommunityPage from "../community-page"
+import type { NextPage } from "@/utils/types"
 
 export const metadata = {
   title: "rising"
 }
 
-const Rising: React.FC = () => {
-  return <Posts source="rising" />
+const Rising: NextPage = ({ searchParams }) => {
+  return <CommunityPage source="rising" searchParams={searchParams} />
 }
 
 export default Rising

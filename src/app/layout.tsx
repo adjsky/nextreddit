@@ -2,7 +2,6 @@ import "@/styles/globals.css"
 import React from "react"
 import Link from "next/link"
 import { Inter } from "@next/font/google"
-
 import packageJson from "../../package.json"
 
 export const metadata = {
@@ -23,7 +22,7 @@ const RootLayout: React.FC<React.PropsWithChildren> = ({ children }) => {
   return (
     <html lang="en" className={inter.variable}>
       <head />
-      <body className="bg-black-900 text-white">
+      <body className="scroll-smooth bg-black-900 text-white">
         <Header />
         {children}
       </body>
