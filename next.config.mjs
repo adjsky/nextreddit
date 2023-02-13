@@ -7,6 +7,9 @@ const nextConfig = {
   experimental: {
     // Required:
     appDir: true
+  },
+  images: {
+    domains: ["www.redditstatic.com", "preview.redd.it"]
   }
 }
 

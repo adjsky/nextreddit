@@ -41,7 +41,7 @@ const CommunityNavigation: React.FC = () => {
               className={clsx(
                 "flex py-2 px-5",
                 item.href == pathname && "bg-aqua text-gray-600",
-                item.href != pathname && "bg-gray-600 text-white"
+                item.href != pathname && "bg-gray-600"
               )}
             >
               {item.title}

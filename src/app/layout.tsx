@@ -25,7 +25,7 @@ const RootLayout: React.FC<React.PropsWithChildren> = ({ children }) => {
       <head />
       <body className="bg-black-900 text-white">
         <Header />
-        {children}
+        <div className="px-3">{children}</div>
       </body>
     </html>
   )
@@ -33,14 +33,17 @@ const RootLayout: React.FC<React.PropsWithChildren> = ({ children }) => {
 
 const Header: React.FC = () => {
   return (
-    <header className="flex w-full bg-gray-500 px-3 py-3">
-      <div className="flex gap-2 text-xl">
-        <Link href="/">
-          <span className="text-white">next</span>
-          <span className="text-aqua">reddit.</span>
-        </Link>
-        <span className="text-white opacity-50">v{packageJson.version}</span>
+    <header>
+      <div className="fixed top-0 left-0 z-10 flex h-[3.125rem] w-full items-center bg-gray-500 px-3">
+        <div className="flex gap-2 text-xl">
+          <Link href="/">
+            <span>next</span>
+            <span className="text-aqua">reddit.</span>
+          </Link>
+          <span className="opacity-50">v{packageJson.version}</span>
+        </div>
       </div>
+      <div className="h-[3.125rem]" />
     </header>
   )
 }
