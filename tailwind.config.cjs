@@ -13,7 +13,8 @@ module.exports = {
         600: "#222222"
       },
       aqua: "#00FFFF",
-      white: "#ffffff"
+      white: "#ffffff",
+      green: "#5cff85"
     },
     extend: {
       fontFamily: {

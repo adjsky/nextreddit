@@ -9,7 +9,11 @@ const nextConfig = {
     appDir: true
   },
   images: {
-    domains: ["www.redditstatic.com", "preview.redd.it"]
+    domains: [
+      "www.redditstatic.com",
+      "preview.redd.it",
+      "external-preview.redd.it"
+    ]
   }
 }
 

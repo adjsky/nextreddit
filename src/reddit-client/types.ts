@@ -9,12 +9,15 @@ export type LinkFlairRichText =
     }
   | { e: "emoji"; u: string }
 
+export type RedditImage = {
+  url: string
+  width: number
+  height: number
+}
+
 export type PreviewImage = {
-  source: {
-    url: string
-    width: number
-    height: number
-  }
+  source: RedditImage
+  resolutions: RedditImage[]
 }
 
 export type Awarding = {
@@ -35,16 +38,27 @@ export type PostData = {
   id: string
   author: string
   name: string
-  num_comments: string
+  num_comments: number
   link_flair_text: string | null
   link_flair_richtext: LinkFlairRichText[]
   link_flair_text_color: string | null
   link_flair_background_color: string | null
   all_awardings: Awarding[]
+  stickied: boolean
 } & (
   | {
-      post_hint?: "link" | "image"
+      post_hint: "link"
       url: string
+      preview: {
+        images: PreviewImage[]
+      }
+      domain: string
+    }
+  | {
+      post_hint: "image"
+      preview: {
+        images: PreviewImage[]
+      }
     }
   | {
       post_hint: "hosted:video"
@@ -58,7 +72,7 @@ export type PostData = {
       }
     }
   | {
-      post_hint: "self"
+      post_hint: undefined
       selftext: string
     }
 )

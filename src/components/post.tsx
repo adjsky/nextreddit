@@ -1,10 +1,13 @@
 import "react-loading-skeleton/dist/skeleton.css"
+import "@/styles/selftext.css"
 import React from "react"
 import clsx from "clsx"
 import Link from "next/link"
 import Image from "next/image"
 import Skeleton from "react-loading-skeleton"
 import { decode } from "html-entities"
+import ReactMarkdown from "react-markdown"
+import remarkGfm from "remark-gfm"
 import { date } from "@/utils/dayjs"
 import type { PostData } from "@/reddit-client"
 
@@ -17,19 +20,42 @@ type PostProps =
     } & PostData)
 
 const Post: React.FC<PostProps> = (props) => {
+  const noBody =
+    !props.loading &&
+    (props.post_hint == "link" || (!props.post_hint && !props.selftext))
+  const stickied = !props.loading && props.stickied
+
   return (
-    <div className="flex w-full items-baseline gap-2 rounded-md border border-gray-300 bg-black-500 px-3 py-4">
-      <span className="flex min-w-[2.5rem] shrink-0 text-sm font-bold text-aqua">
+    <div
+      className={clsx(
+        "flex w-full items-baseline gap-2 rounded-md border border-gray-300 bg-black-500 px-3 py-4",
+        stickied && "border border-green"
+      )}
+    >
+      <span
+        className={clsx(
+          "flex min-w-[2.5rem] shrink-0 text-sm font-bold",
+          stickied ? "text-green" : "text-aqua"
+        )}
+      >
         {props.loading ? (
           <Skeleton containerClassName="w-full" />
         ) : (
-          getScoreLabel(props.score)
+          getNumberLabel(props.score)
         )}
       </span>
       <div className="w-full">
         <HeadingRow {...props} />
         <hr className="border-none py-2" />
         <TitleRow {...props} />
+        {!noBody && (
+          <>
+            <hr className="border-none py-2" />
+            <PostBody {...props} />
+          </>
+        )}
+        <hr className="border-none py-2" />
+        <FooterRow {...props} />
       </div>
     </div>
   )
@@ -126,11 +152,63 @@ const TitleRow: React.FC<PostProps> = (props) => {
   )
 }
 
+const PostBody: React.FC<PostProps> = (props) => {
+  if (props.loading) {
+    return <Skeleton count={5} />
+  }
+
+  if (props.post_hint == "image") {
+    const image = props.preview.images[0].source
+
+    return (
+      <a href="#">
+        <Image
+          src={decode(image.url)}
+          width={image.width}
+          height={image.height}
+          alt="Preview"
+          className="max-h-[512px] w-full object-contain"
+        />
+      </a>
+    )
+  }
+
+  if (!props.post_hint && props.selftext) {
+    return (
+      <div className="selftext">
+        <ReactMarkdown remarkPlugins={[remarkGfm]}>
+          {props.selftext}
+        </ReactMarkdown>
+      </div>
+    )
+  }
+
+  if (props.post_hint == "hosted:video") {
+    return <span>VIDEO!!!</span>
+  }
+
+  return null
+}
+
+const FooterRow: React.FC<PostProps> = (props) => {
+  return (
+    <div className="flex justify-between text-sm">
+      {props.loading ? (
+        <Skeleton containerClassName="w-full" />
+      ) : (
+        <a href="#" className="font-bold opacity-50">
+          <span>{getNumberLabel(props.num_comments)} comments</span>
+        </a>
+      )}
+    </div>
+  )
+}
+
 const DotDelimeter: React.FC = () => {
   return <span className="text-xs opacity-50">•</span>
 }
 
-const getScoreLabel = (score: number) => {
+const getNumberLabel = (score: number) => {
   if (score < 1000) {
     return score
   }

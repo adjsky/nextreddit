@@ -1,0 +1,35 @@
+.selftext {
+  mask-image: linear-gradient(180deg, #000 60%, transparent);
+  max-height: 250px;
+  overflow: hidden;
+  opacity: 0.8;
+  font-size: 0.875rem;
+}
+
+.selftext table,
+td,
+th {
+  border: 1px solid theme("colors.gray.300");
+}
+
+.selftext table {
+  margin: 0.25rem;
+  overflow-x: auto;
+  display: block;
+  max-width: fit-content;
+  border-width: 3px;
+  border-spacing: 0;
+}
+
+.selftext th,
+td {
+  padding: 0.625rem;
+}
+
+.selftext a {
+  color: theme("colors.green");
+}
+
+.selftext > *:not(:first-child) {
+  margin-top: 0.625rem;
+}
