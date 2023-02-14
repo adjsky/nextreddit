@@ -1,6 +1,7 @@
 import "@/styles/globals.css"
 import React from "react"
 import Link from "next/link"
+import { SkeletonTheme } from "react-loading-skeleton"
 import { Inter } from "@next/font/google"
 import packageJson from "../../package.json"
 
@@ -22,9 +23,11 @@ const RootLayout: React.FC<React.PropsWithChildren> = ({ children }) => {
   return (
     <html lang="en" className={inter.variable}>
       <head />
-      <body className="scroll-smooth bg-black-900 text-white">
+      <body className="bg-black-900 text-white">
         <Header />
-        {children}
+        <SkeletonTheme baseColor="#333" highlightColor="#444">
+          {children}
+        </SkeletonTheme>
       </body>
     </html>
   )

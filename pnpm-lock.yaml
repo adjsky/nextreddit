@@ -19,6 +19,7 @@ specifiers:
   query-string: ^8.1.0
   react: 18.2.0
   react-dom: 18.2.0
+  react-loading-skeleton: ^3.1.1
   server-only: ^0.0.1
   sharp: ^0.31.3
   tailwindcss: ^3.2.6
@@ -34,6 +35,7 @@ dependencies:
   query-string: 8.1.0
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
+  react-loading-skeleton: 3.1.1_react@18.2.0
   server-only: 0.0.1
   sharp: 0.31.3
   zod: 3.20.6
@@ -2317,6 +2319,14 @@ packages:
   /react-is/16.13.1:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
     dev: true
+
+  /react-loading-skeleton/3.1.1_react@18.2.0:
+    resolution: {integrity: sha512-gQeNzzKXlevvquRDOhN5kas5VE7toTKrpmE9BpUdf0iip9c5ae0LcVbulh5ebO2CFl4RrYsyLuDtYGyrh1h1iA==}
+    peerDependencies:
+      react: '>=16.8.0'
+    dependencies:
+      react: 18.2.0
+    dev: false
 
   /react/18.2.0:
     resolution: {integrity: sha512-/3IjMdb2L9QbBdWiW5e3P2/npwMBaU9mHCSCUzNln0ZCYbcfTsGbTJrU/kGemdH2IWmB2ioZ+zkxtmq6g09fGQ==}

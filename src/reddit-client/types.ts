@@ -36,9 +36,10 @@ export type PostData = {
   author: string
   name: string
   num_comments: string
+  link_flair_text: string | null
   link_flair_richtext: LinkFlairRichText[]
-  link_flair_text_color: string
-  link_flair_background_color: string
+  link_flair_text_color: string | null
+  link_flair_background_color: string | null
   all_awardings: Awarding[]
 } & (
   | {
