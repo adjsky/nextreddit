@@ -11,7 +11,5 @@ export function makeRequest(url: string, options?: MakeRequestOptions) {
   const stringifiedQuery = query ? queryString.stringify(query) : null
   const buildedUrl = stringifiedQuery ? `${url}?${stringifiedQuery}` : url
 
-  console.log(buildedUrl)
-
   return fetch(buildedUrl, otherOptions)
 }
