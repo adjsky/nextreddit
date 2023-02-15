@@ -10,6 +10,7 @@ import ReactMarkdown from "react-markdown"
 import remarkGfm from "remark-gfm"
 import { z } from "zod"
 import { CiLink } from "react-icons/ci"
+import { IoArrowUp } from "react-icons/io5"
 import { date } from "@/utils/dayjs"
 import type { PostData } from "@/reddit-client"
 
@@ -33,7 +34,7 @@ const Post: React.FC<PostProps> = (props) => {
     >
       <span
         className={clsx(
-          "flex min-w-[2.5rem] shrink-0 text-sm font-bold",
+          "hidden min-w-[2.5rem] shrink-0 text-sm font-bold sm:flex",
           stickied ? "text-green" : "text-aqua"
         )}
       >
@@ -56,7 +57,7 @@ const Post: React.FC<PostProps> = (props) => {
 
 const HeadingRow: React.FC<PostProps> = (props) => {
   return (
-    <div className="flex flex-wrap items-center gap-1">
+    <div className="flex flex-wrap items-center gap-1 text-sm sm:text-base">
       {props.loading ? (
         <Skeleton containerClassName="w-16" />
       ) : (
@@ -185,12 +186,22 @@ const PostBody: React.FC<PostProps> = (props) => {
 
 const FooterRow: React.FC<PostProps> = (props) => {
   return (
-    <div className="flex justify-between text-sm">
+    <div className="flex items-center gap-3 text-sm font-bold">
+      <div className="flex items-center sm:hidden">
+        {props.loading ? (
+          <Skeleton containerClassName="w-10" />
+        ) : (
+          <>
+            <IoArrowUp className="stroke-aqua" />
+            <span className="text-aqua">{getNumberLabel(props.score)}</span>
+          </>
+        )}
+      </div>
       {props.loading ? (
-        <Skeleton containerClassName="w-full" />
+        <Skeleton containerClassName="w-32" />
       ) : (
-        <Link href="#" className="font-bold opacity-50">
-          <span>{getNumberLabel(props.num_comments)} comments</span>
+        <Link href="#" className="opacity-50">
+          {getNumberLabel(props.num_comments)} comments
         </Link>
       )}
     </div>
@@ -226,7 +237,7 @@ const LinkBlock: React.FC<PostProps> = (props) => {
       href={props.url}
       target="_blank"
       rel="noreferrer"
-      className="relative flex h-36 w-36 shrink-0 flex-col self-stretch overflow-hidden rounded-md border border-gray-300 bg-gray-300"
+      className="relative flex max-w-[8.75rem] flex-col self-stretch overflow-hidden rounded-md border border-gray-300 bg-black-900 sm:shrink-0"
     >
       <span className="flex flex-1 items-center justify-center">
         {z.string().url().safeParse(imageUrl).success &&
@@ -243,7 +254,7 @@ const LinkBlock: React.FC<PostProps> = (props) => {
           <CiLink size="2.5rem" />
         )}
       </span>
-      <span className="absolute left-0 right-0 bottom-0 bg-black-900/80 py-1 text-center text-sm">
+      <span className="absolute left-0 right-0 bottom-0 overflow-hidden text-ellipsis bg-black-900/80 p-1 text-center text-sm">
         {domain}
       </span>
     </a>

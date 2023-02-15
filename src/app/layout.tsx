@@ -4,6 +4,7 @@ import Link from "next/link"
 import { SkeletonTheme } from "react-loading-skeleton"
 import { Inter } from "@next/font/google"
 import packageJson from "../../package.json"
+import ScrollToTop from "@/components/scroll-to-top"
 
 export const metadata = {
   title: {
@@ -28,6 +29,7 @@ const RootLayout: React.FC<React.PropsWithChildren> = ({ children }) => {
         <SkeletonTheme baseColor="#333" highlightColor="#444">
           {children}
         </SkeletonTheme>
+        <ScrollToTop />
       </body>
     </html>
   )
