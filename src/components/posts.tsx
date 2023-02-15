@@ -28,15 +28,16 @@ const getPosts = async (source: Community, after?: string, before?: string) => {
 
 const AsyncPosts = async ({ source, after, before }: PostsProps) => {
   const posts = await getPosts(source, after, before)
+  const hasPosts = posts.length > 0
 
   return (
     <>
       <div className="flex w-full flex-col gap-3">
-        {posts.map((post) => (
-          <Post key={post.data.id} {...post.data} />
-        ))}
+        {!hasPosts && <p className="text-center">No posts were found</p>}
+        {hasPosts &&
+          posts.map((post) => <Post key={post.data.id} {...post.data} />)}
       </div>
-      <PostsPagination next={posts[posts.length - 1].data.name} />
+      {hasPosts && <PostsPagination next={posts[posts.length - 1].data.name} />}
     </>
   )
 }

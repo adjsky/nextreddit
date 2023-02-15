@@ -12,7 +12,9 @@ const nextConfig = {
     domains: [
       "www.redditstatic.com",
       "preview.redd.it",
-      "external-preview.redd.it"
+      "external-preview.redd.it",
+      "b.thumbs.redditmedia.com",
+      "a.thumbs.redditmedia.com"
     ]
   }
 }

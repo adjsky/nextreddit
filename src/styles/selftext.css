@@ -4,6 +4,7 @@
   overflow: hidden;
   opacity: 0.8;
   font-size: 0.875rem;
+  overflow-wrap: break-word;
 }
 
 .selftext table,
@@ -27,6 +28,10 @@ td {
 }
 
 .selftext a {
+  color: theme("colors.aqua");
+}
+
+.selftext.stickied a {
   color: theme("colors.green");
 }
 

@@ -8,6 +8,8 @@ import Skeleton from "react-loading-skeleton"
 import { decode } from "html-entities"
 import ReactMarkdown from "react-markdown"
 import remarkGfm from "remark-gfm"
+import { z } from "zod"
+import { CiLink } from "react-icons/ci"
 import { date } from "@/utils/dayjs"
 import type { PostData } from "@/reddit-client"
 
@@ -20,9 +22,6 @@ type PostProps =
     } & PostData)
 
 const Post: React.FC<PostProps> = (props) => {
-  const noBody =
-    !props.loading &&
-    (props.post_hint == "link" || (!props.post_hint && !props.selftext))
   const stickied = !props.loading && props.stickied
 
   return (
@@ -44,19 +43,13 @@ const Post: React.FC<PostProps> = (props) => {
           getNumberLabel(props.score)
         )}
       </span>
-      <div className="w-full">
+      <div className="flex w-full flex-col gap-4">
         <HeadingRow {...props} />
-        <hr className="border-none py-2" />
         <TitleRow {...props} />
-        {!noBody && (
-          <>
-            <hr className="border-none py-2" />
-            <PostBody {...props} />
-          </>
-        )}
-        <hr className="border-none py-2" />
+        <PostBody {...props} />
         <FooterRow {...props} />
       </div>
+      <LinkBlock {...props} />
     </div>
   )
 }
@@ -107,7 +100,7 @@ const TitleRow: React.FC<PostProps> = (props) => {
   return (
     <h2>
       {!props.loading && hasFlair && (
-        <a
+        <Link
           href="#"
           className={clsx(
             "mr-2 inline-flex items-center gap-1 rounded-md p-1 align-middle text-xs font-bold",
@@ -139,14 +132,14 @@ const TitleRow: React.FC<PostProps> = (props) => {
                 )
               )
             : decode(props.link_flair_text)}
-        </a>
+        </Link>
       )}
       {props.loading ? (
         <Skeleton count={2} />
       ) : (
-        <a href="#" className="font-medium">
+        <Link href="#" className="font-medium">
           {props.title}
-        </a>
+        </Link>
       )}
     </h2>
   )
@@ -161,7 +154,7 @@ const PostBody: React.FC<PostProps> = (props) => {
     const image = props.preview.images[0].source
 
     return (
-      <a href="#">
+      <Link href="#">
         <Image
           src={decode(image.url)}
           width={image.width}
@@ -169,13 +162,13 @@ const PostBody: React.FC<PostProps> = (props) => {
           alt="Preview"
           className="max-h-[512px] w-full object-contain"
         />
-      </a>
+      </Link>
     )
   }
 
   if (!props.post_hint && props.selftext) {
     return (
-      <div className="selftext">
+      <div className={clsx("selftext", props.stickied && "stickied")}>
         <ReactMarkdown remarkPlugins={[remarkGfm]}>
           {props.selftext}
         </ReactMarkdown>
@@ -196,11 +189,64 @@ const FooterRow: React.FC<PostProps> = (props) => {
       {props.loading ? (
         <Skeleton containerClassName="w-full" />
       ) : (
-        <a href="#" className="font-bold opacity-50">
+        <Link href="#" className="font-bold opacity-50">
           <span>{getNumberLabel(props.num_comments)} comments</span>
-        </a>
+        </Link>
       )}
     </div>
+  )
+}
+
+const LinkBlock: React.FC<PostProps> = (props) => {
+  if (props.loading || (props.post_hint != "link" && !props.is_gallery)) {
+    return null
+  }
+
+  let imageUrl = decode(props.thumbnail)
+  let imageWidth = props.thumbnail_width
+  let imageHeight = props.thumbnail_height
+  const domain = props.post_hint == "link" ? props.domain : "gallery"
+
+  if (props.post_hint == "link") {
+    const images = props.preview.images[0]
+
+    if (images.resolutions.length > 0) {
+      const image =
+        images.resolutions.length > 2
+          ? images.resolutions[2]
+          : images.resolutions[images.resolutions.length - 1]
+      imageUrl = decode(image.url)
+      imageWidth = image.width
+      imageHeight = image.height
+    }
+  }
+
+  return (
+    <a
+      href={props.url}
+      target="_blank"
+      rel="noreferrer"
+      className="relative flex h-36 w-36 shrink-0 flex-col self-stretch overflow-hidden rounded-md border border-gray-300 bg-gray-300"
+    >
+      <span className="flex flex-1 items-center justify-center">
+        {z.string().url().safeParse(imageUrl).success &&
+        imageWidth != null &&
+        imageHeight != null ? (
+          <Image
+            src={imageUrl}
+            width={imageWidth}
+            height={imageHeight}
+            alt=""
+            className="object-contain"
+          />
+        ) : (
+          <CiLink size="2.5rem" />
+        )}
+      </span>
+      <span className="absolute left-0 right-0 bottom-0 bg-black-900/80 py-1 text-center text-sm">
+        {domain}
+      </span>
+    </a>
   )
 }
 

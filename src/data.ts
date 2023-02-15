@@ -1,7 +1,7 @@
 export const communities = [
   "hot",
-  "top",
   "new",
+  "top",
   "rising",
   "controversial"
 ] as const

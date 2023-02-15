@@ -1,5 +1,4 @@
 import Posts from "@/components/posts"
-import ScrollToTop from "@/components/scroll-to-top"
 
 import type { Community } from "@/data"
 import type { NextPageProps } from "@/utils/types"
@@ -16,12 +15,7 @@ const CommunityPage = ({
   const checkedAfter = Array.isArray(after) ? undefined : after
   const checkedBefore = Array.isArray(before) ? undefined : before
 
-  return (
-    <>
-      <Posts source={source} after={checkedAfter} before={checkedBefore} />
-      <ScrollToTop key={checkedAfter ?? "" + checkedBefore ?? ""} />
-    </>
-  )
+  return <Posts source={source} after={checkedAfter} before={checkedBefore} />
 }
 
 export default CommunityPage

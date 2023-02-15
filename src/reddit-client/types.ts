@@ -45,10 +45,14 @@ export type PostData = {
   link_flair_background_color: string | null
   all_awardings: Awarding[]
   stickied: boolean
+  is_gallery?: boolean
+  thumbnail: string
+  thumbnail_width: number | null
+  thumbnail_height: number | null
+  url: string
 } & (
   | {
       post_hint: "link"
-      url: string
       preview: {
         images: PreviewImage[]
       }
