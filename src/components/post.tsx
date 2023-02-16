@@ -8,6 +8,7 @@ import Skeleton from "react-loading-skeleton"
 import { decode } from "html-entities"
 import ReactMarkdown from "react-markdown"
 import remarkGfm from "remark-gfm"
+import rehypeRaw from "rehype-raw"
 import { z } from "zod"
 import { CiLink } from "react-icons/ci"
 import { IoArrowUp } from "react-icons/io5"
@@ -170,7 +171,7 @@ const PostBody: React.FC<PostProps> = (props) => {
   if (!props.post_hint && props.selftext) {
     return (
       <div className={clsx("selftext", props.stickied && "stickied")}>
-        <ReactMarkdown remarkPlugins={[remarkGfm]}>
+        <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]}>
           {props.selftext}
         </ReactMarkdown>
       </div>
