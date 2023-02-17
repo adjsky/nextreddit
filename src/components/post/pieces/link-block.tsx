@@ -3,6 +3,7 @@ import Image from "next/image"
 import { decode } from "html-entities"
 import { z } from "zod"
 import { CiLink } from "react-icons/ci"
+import { ExternalUnderlineLink } from "@/components/underline-link"
 
 import type { PostProps } from "../types"
 
@@ -31,7 +32,7 @@ const LinkBlock: React.FC<PostProps> = (props) => {
   }
 
   return (
-    <a
+    <ExternalUnderlineLink
       href={props.url}
       target="_blank"
       rel="noreferrer"
@@ -52,10 +53,10 @@ const LinkBlock: React.FC<PostProps> = (props) => {
           <CiLink size="2.5rem" />
         )}
       </span>
-      <span className="absolute left-0 right-0 bottom-0 overflow-hidden text-ellipsis bg-black-900/80 p-1 text-center text-sm">
+      <span className="inherit-decoration absolute left-0 right-0 bottom-0 overflow-hidden text-ellipsis bg-black-900/80 p-1 text-center text-sm">
         {domain}
       </span>
-    </a>
+    </ExternalUnderlineLink>
   )
 }
 
