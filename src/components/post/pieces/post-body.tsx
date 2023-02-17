@@ -41,11 +41,23 @@ const PostBody: React.FC<PostProps> = (props) => {
 
   if (props.post_hint == "hosted:video") {
     const video = props.media.reddit_video
+    const horizontal = video.width > video.height
+
+    const containerHeight = horizontal
+      ? "auto"
+      : video.height > 512
+      ? "512px"
+      : `${video.height}px`
+    const containerWidth = horizontal ? "100%" : "auto"
 
     return (
       <div
-        className="h-auto max-h-[512px] w-auto max-w-full"
-        style={{ aspectRatio: video.width / video.height }}
+        className="mx-auto"
+        style={{
+          aspectRatio: video.width / video.height,
+          height: containerHeight,
+          width: containerWidth
+        }}
       >
         <VideoPlayer
           sources={[

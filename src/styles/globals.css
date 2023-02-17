@@ -7,6 +7,12 @@
   -webkit-tap-highlight-color: transparent;
 }
 
+@supports (font: -apple-system-body) and (-webkit-appearance: none) {
+  img[loading="lazy"] {
+    clip-path: inset(0.6px);
+  }
+}
+
 @layer utilies {
   .inherit-decoration {
     text-decoration: inherit;
