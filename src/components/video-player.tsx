@@ -1,6 +1,7 @@
 "use client"
 
 import "video.js/dist/video-js.css"
+import "@/styles/videojs.css"
 import React, { useRef, useEffect } from "react"
 import videojs from "video.js"
 

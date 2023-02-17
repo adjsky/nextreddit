@@ -1,6 +1,5 @@
 import "react-loading-skeleton/dist/skeleton.css"
 import "@/styles/selftext.css"
-import "@/styles/videojs.css"
 import React from "react"
 import clsx from "clsx"
 import Skeleton from "react-loading-skeleton"
