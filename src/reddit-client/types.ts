@@ -69,6 +69,8 @@ export type PostData = {
       media: {
         reddit_video: {
           hls_url: string
+          width: number
+          height: number
         }
       }
       preview: {
@@ -76,7 +78,8 @@ export type PostData = {
       }
     }
   | {
-      post_hint: undefined
+      post_hint?: "self"
       selftext: string
+      selftext_html: string | null
     }
 )

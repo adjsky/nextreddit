@@ -14,7 +14,9 @@ module.exports = {
       },
       aqua: "#00FFFF",
       white: "#ffffff",
-      green: "#5cff85"
+      green: "#5cff85",
+      transparent: "transparent",
+      current: "currentcolor"
     },
     extend: {
       fontFamily: {
@@ -24,5 +26,8 @@ module.exports = {
         ]
       }
     }
+  },
+  future: {
+    hoverOnlyWhenSupported: true
   }
 }

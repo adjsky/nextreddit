@@ -2,6 +2,7 @@
 import React, { useState, useEffect, useCallback } from "react"
 import useWindowEvent from "@/utils/use-window-event"
 import { IoArrowUp } from "react-icons/io5"
+import clsx from "clsx"
 
 const ScrollToTop: React.FC = () => {
   const [visible, setVisible] = useState(false)
@@ -24,7 +25,10 @@ const ScrollToTop: React.FC = () => {
       onClick={() => {
         window.scrollTo({ top: 0, left: 0 })
       }}
-      className="fixed bottom-5 right-5 flex h-10 w-10 items-center justify-center rounded-full border border-gray-300 bg-black-900/80"
+      className={clsx(
+        "fixed bottom-5 right-5 flex h-10 w-10 items-center justify-center rounded-full border",
+        "border-gray-300 bg-black-900/80 transition-colors hover:bg-gray-500/80"
+      )}
     >
       <IoArrowUp className="stroke-aqua" size="1.5rem" />
     </button>

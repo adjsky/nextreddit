@@ -2,10 +2,10 @@
 
 import React from "react"
 import { usePathname } from "next/navigation"
-import Link from "next/link"
 import clsx from "clsx"
 import capitalize from "@/utils/capitalize"
 import { communities } from "@/data"
+import UnderlineLink from "./underline-link"
 
 const navigation = communities.map((community) => ({
   title: capitalize(community),
@@ -20,16 +20,16 @@ const CommunityNavigation: React.FC = () => {
       <ul className="flex">
         {navigation.map((item, index) => (
           <li key={index}>
-            <Link
+            <UnderlineLink
               href={item.href}
               className={clsx(
                 "flex py-2 px-5",
                 item.href == pathname && "bg-aqua text-gray-600",
-                item.href != pathname && "bg-gray-600"
+                item.href != pathname && "bg-gray-500 hover:bg-gray-600"
               )}
             >
               {item.title}
-            </Link>
+            </UnderlineLink>
           </li>
         ))}
       </ul>

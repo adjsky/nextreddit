@@ -1,10 +1,10 @@
 import "@/styles/globals.css"
 import React from "react"
-import Link from "next/link"
 import { SkeletonTheme } from "react-loading-skeleton"
 import { Inter } from "@next/font/google"
 import packageJson from "../../package.json"
 import ScrollToTop from "@/components/scroll-to-top"
+import UnderlineLink from "@/components/underline-link"
 
 export const metadata = {
   title: {
@@ -40,10 +40,10 @@ const Header: React.FC = () => {
     <header>
       <div className="fixed top-0 left-0 z-10 flex h-[3.125rem] w-full items-center bg-gray-500 px-3">
         <div className="flex gap-2 text-xl">
-          <Link href="/">
+          <UnderlineLink href="/">
             <span>next</span>
             <span className="text-aqua">reddit.</span>
-          </Link>
+          </UnderlineLink>
           <span className="opacity-50">v{packageJson.version}</span>
         </div>
       </div>
