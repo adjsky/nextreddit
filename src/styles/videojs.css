@@ -1,37 +1,37 @@
-.video-js {
-  height: 100% !important;
-  padding: 0 !important;
-  background: theme("colors.black.900") !important;
+.video-js.vjs-fluid:not(.vjs-audio-only-mode) {
+  height: 100%;
+  padding: 0;
+  background: theme("colors.black.900");
 }
 
 .video-js:hover .vjs-big-play-button {
-  background: theme("colors.black.500/0.8") !important;
+  background: theme("colors.black.500/0.8");
 }
 
-.vjs-big-play-button {
-  background: theme("colors.black.900") !important;
-  border: none !important;
+.video-js .vjs-big-play-button {
+  background: theme("colors.black.900");
+  border: none;
 
-  transition: 0.15s cubic-bezier(0.4, 0, 0.2, 1) !important;
-  transition-property: background !important;
+  transition: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  transition-property: background;
 }
 
-.vjs-icon-placeholder::before {
+.video-js .vjs-icon-placeholder::before {
   color: theme("colors.white");
 }
 
-.vjs-progress-holder {
-  background: theme("colors.black.500") !important;
+.video-js .vjs-progress-holder {
+  background: theme("colors.black.500");
 }
 
-.vjs-load-progress {
-  background: none !important;
+.video-js .vjs-load-progress {
+  background: none;
 }
 
-.vjs-load-progress div {
-  background: theme("colors.gray.300") !important;
+.video-js .vjs-load-progress div {
+  background: theme("colors.gray.300");
 }
 
-.vjs-control-bar {
-  background: theme("colors.black.900/0.7") !important;
+.video-js .vjs-control-bar {
+  background: theme("colors.black.900/0.7");
 }
