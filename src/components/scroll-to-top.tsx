@@ -26,7 +26,7 @@ const ScrollToTop: React.FC = () => {
         window.scrollTo({ top: 0, left: 0 })
       }}
       className={clsx(
-        "fixed bottom-5 right-5 flex h-10 w-10 items-center justify-center rounded-full border",
+        "fixed bottom-5 right-5 flex h-11 w-11 items-center justify-center rounded-full border",
         "border-gray-300 bg-black-900/80 transition-colors hover:bg-gray-500/80"
       )}
     >
