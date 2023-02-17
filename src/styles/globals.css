@@ -13,7 +13,7 @@
   }
 }
 
-@layer base {
+@layer utilities {
   .inherit-decoration {
     text-decoration: inherit;
   }
