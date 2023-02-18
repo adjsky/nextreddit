@@ -42,7 +42,7 @@ const PostBody: React.FC<PostProps> = (props) => {
 
   if (props.post_hint == "hosted:video") {
     const video = props.media.reddit_video
-    const horizontal = video.width > video.height
+    const horizontal = video.width >= video.height
 
     const containerHeight = horizontal
       ? "auto"
