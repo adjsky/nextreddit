@@ -7,6 +7,7 @@ import { decode } from "html-entities"
 import clsx from "clsx"
 
 import VideoPlayer from "../../video-player"
+import MediaViewer from "@/components/media-viewer"
 
 import type { PostProps } from "../types"
 
@@ -19,7 +20,7 @@ const PostBody: React.FC<PostProps> = (props) => {
     const image = props.preview.images[0].source
 
     return (
-      <Link href="#">
+      <MediaViewer>
         <Image
           src={decode(image.url)}
           width={image.width}
@@ -27,7 +28,7 @@ const PostBody: React.FC<PostProps> = (props) => {
           alt="Preview"
           className="max-h-[512px] w-full object-contain"
         />
-      </Link>
+      </MediaViewer>
     )
   }
 
