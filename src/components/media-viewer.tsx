@@ -16,7 +16,8 @@ const MediaViewer: React.FC<{ children: ReactElement<ImageProps> }> = ({
   const bigImage = useMemo(
     () =>
       cloneElement(children, {
-        className: "max-w-[1000px] w-full h-auto max-h-[85%] object-contain"
+        className:
+          "max-w-[1000px] w-[calc(100%-1.25rem)] h-auto max-h-[85%] object-contain"
       }),
     [children]
   )
@@ -39,7 +40,7 @@ const MediaViewer: React.FC<{ children: ReactElement<ImageProps> }> = ({
             className="fixed inset-0 z-50 flex items-center justify-center bg-[rgba(0,0,0,.88)]"
             onClick={toggle}
           >
-            <button className="group absolute right-3 top-3 rounded-full p-1.5 transition-colors hover:bg-gray-600/40">
+            <button className="group absolute right-1 top-1 rounded-full p-1.5 transition-colors hover:bg-gray-600/40 sm:right-3 sm:top-3">
               <IoCloseOutline
                 size="1.75rem"
                 className="stroke-gray-100 transition-colors group-hover:stroke-white"
