@@ -34,3 +34,9 @@
 .video-js[data-custom="true"] .vjs-control-bar {
   background: theme("colors.black.900/0.7");
 }
+
+@container (min-width: 0px) {
+  .vjs-vertical-container {
+    height: calc(min(var(--height), 100cqw / var(--ratio)));
+  }
+}

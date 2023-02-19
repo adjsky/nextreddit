@@ -2,7 +2,6 @@ import React from "react"
 import parseHtmlToReact from "html-react-parser"
 import Skeleton from "react-loading-skeleton"
 import Image from "next/image"
-import Link from "next/link"
 import { decode } from "html-entities"
 import clsx from "clsx"
 
@@ -44,36 +43,45 @@ const PostBody: React.FC<PostProps> = (props) => {
     const video = props.media.reddit_video
     const horizontal = video.width >= video.height
 
-    const containerHeight = horizontal
-      ? "auto"
-      : video.height > 512
-      ? "512px"
-      : `${video.height}px`
     const containerWidth = horizontal ? "100%" : "auto"
+    const aspectRatio = video.width / video.height
 
     return (
-      <div
-        className="mx-auto"
-        style={{
-          aspectRatio: video.width / video.height,
-          height: containerHeight,
-          width: containerWidth
-        }}
-      >
-        <VideoPlayer
-          sources={[
+      <div className="@container">
+        <div
+          className={clsx(
+            "mx-auto",
+            horizontal && "h-auto",
+            !horizontal && "vjs-vertical-container"
+          )}
+          style={
             {
-              src: decode(video.hls_url),
-              type: "application/x-mpegURL"
-            }
-          ]}
-          poster={decode(props.preview.images[0].source.url)}
-          preload="none"
-          autoplay={false}
-          className="h-full"
-          controls
-          fluid
-        />
+              "--ratio": aspectRatio,
+              "--height": !horizontal
+                ? video.height >= 512
+                  ? "512px"
+                  : `${video.height}px`
+                : undefined,
+              aspectRatio: "var(--ratio)",
+              width: containerWidth
+            } as React.CSSProperties
+          }
+        >
+          <VideoPlayer
+            sources={[
+              {
+                src: decode(video.hls_url),
+                type: "application/x-mpegURL"
+              }
+            ]}
+            poster={decode(props.preview.images[0].source.url)}
+            preload="none"
+            autoplay={false}
+            className="h-full"
+            controls
+            fluid
+          />
+        </div>
       </div>
     )
   }
