@@ -53,7 +53,7 @@ const TitleRow: React.FC<PostProps> = (props) => {
         <Skeleton count={2} />
       ) : (
         <UnderlineLink href="#" className="font-medium">
-          {props.title}
+          {decode(props.title)}
         </UnderlineLink>
       )}
     </h2>
