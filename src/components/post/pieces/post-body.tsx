@@ -17,15 +17,19 @@ const PostBody: React.FC<PostProps> = (props) => {
 
   if (props.post_hint == "image") {
     const image = props.preview.images[0].source
+    const long = image.height / image.width > 3
 
     return (
-      <MediaViewer>
+      <MediaViewer className="flex justify-center">
         <Image
           src={decode(image.url)}
           width={image.width}
           height={image.height}
           alt="Preview"
-          className="max-h-[512px] w-full object-contain"
+          className={clsx(
+            !long && "max-h-[512px] w-full object-contain",
+            long && "max-w-full text-center"
+          )}
         />
       </MediaViewer>
     )

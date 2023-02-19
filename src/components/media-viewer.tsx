@@ -9,9 +9,10 @@ import { lockScroll, unlockScroll } from "@/utils/lock-body-scroll"
 import type { ImageProps } from "next/image"
 import type { ReactElement } from "react"
 
-const MediaViewer: React.FC<{ children: ReactElement<ImageProps> }> = ({
-  children
-}) => {
+const MediaViewer: React.FC<{
+  children: ReactElement<ImageProps>
+  className?: string
+}> = ({ className, children }) => {
   const [toggled, toggle] = useToggle()
   const controls = useAnimationControls()
 
@@ -45,7 +46,9 @@ const MediaViewer: React.FC<{ children: ReactElement<ImageProps> }> = ({
 
   return (
     <>
-      <button onClick={handleOpen}>{children}</button>
+      <button onClick={handleOpen} className={className}>
+        {children}
+      </button>
       {toggled && (
         <motion.div
           animate={controls}
