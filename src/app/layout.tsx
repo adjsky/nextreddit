@@ -1,7 +1,7 @@
 import "@/styles/globals.css"
 import React from "react"
 import { SkeletonTheme } from "react-loading-skeleton"
-import { Inter } from "@next/font/google"
+import { Inter } from "next/font/google"
 import packageJson from "../../package.json"
 import ScrollToTop from "@/components/scroll-to-top"
 import UnderlineLink from "@/components/underline-link"
