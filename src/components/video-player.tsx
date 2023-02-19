@@ -30,6 +30,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ className, ...options }) => {
 
     if (!playerRef.current) {
       const videoElement = document.createElement("video-js")
+      videoElement.dataset.custom = "true"
 
       videoRef.current.appendChild(videoElement)
 
