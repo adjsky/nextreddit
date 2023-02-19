@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@next/font": "^13.1.6",
+    "client-only": "^0.0.1",
     "clsx": "1.2.1",
     "dayjs": "^1.11.7",
     "framer-motion": "^9.0.4",
